@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase, Exercise } from '../lib/supabase';
-import Plus from 'lucide-react/dist/esm/icons/plus';
-import X from 'lucide-react/dist/esm/icons/x';
-import Dumbbell from 'lucide-react/dist/esm/icons/dumbbell';
+import { Plus, X, Dumbbell } from 'lucide-react';
 
 export default function ExerciseManager() {
   const [exercises, setExercises] = useState<Exercise[]>([]);

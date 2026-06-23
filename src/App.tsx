@@ -2,11 +2,10 @@ import { useState } from 'react';
 import AddWorkoutForm from './components/AddWorkoutForm';
 import WorkoutHistory from './components/WorkoutHistory';
 import ExerciseManager from './components/ExerciseManager';
-import Activity from 'lucide-react/dist/esm/icons/activity';
-import History from 'lucide-react/dist/esm/icons/history';
-import Library from 'lucide-react/dist/esm/icons/library';
+import CalorieTracker from './components/CalorieTracker';
+import { Activity, History, Library, Apple } from 'lucide-react';
 
-type Tab = 'log' | 'history' | 'exercises';
+type Tab = 'log' | 'history' | 'exercises' | 'nutrition';
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('log');
@@ -25,14 +24,14 @@ function App() {
             <span className="hidden sm:inline">Josee Gym Tracker</span>
             <span className="sm:hidden">Josee Gym</span>
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">Track your sets, weights, and muscle groups</p>
+          <p className="text-sm sm:text-base text-gray-600">Track your sets, nutrition, and progress</p>
         </header>
 
         <div className="bg-white rounded-xl shadow-lg p-1.5 sm:p-2 mb-6">
-          <div className="flex gap-1 sm:gap-2">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2">
             <button
               onClick={() => setActiveTab('log')}
-              className={`flex-1 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
+              className={`py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
                 activeTab === 'log'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-gray-600 hover:bg-gray-100'
@@ -42,8 +41,19 @@ function App() {
               <span>Log</span>
             </button>
             <button
+              onClick={() => setActiveTab('nutrition')}
+              className={`py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
+                activeTab === 'nutrition'
+                  ? 'bg-emerald-600 text-white shadow-md'
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              <Apple className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span>Nutrition</span>
+            </button>
+            <button
               onClick={() => setActiveTab('history')}
-              className={`flex-1 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
+              className={`py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
                 activeTab === 'history'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-gray-600 hover:bg-gray-100'
@@ -54,7 +64,7 @@ function App() {
             </button>
             <button
               onClick={() => setActiveTab('exercises')}
-              className={`flex-1 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
+              className={`py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-all flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 ${
                 activeTab === 'exercises'
                   ? 'bg-blue-600 text-white shadow-md'
                   : 'text-gray-600 hover:bg-gray-100'
@@ -68,6 +78,7 @@ function App() {
 
         <div className="animate-fadeIn">
           {activeTab === 'log' && <AddWorkoutForm onWorkoutAdded={handleWorkoutAdded} />}
+          {activeTab === 'nutrition' && <CalorieTracker />}
           {activeTab === 'history' && <WorkoutHistory key={refreshKey} />}
           {activeTab === 'exercises' && <ExerciseManager />}
         </div>

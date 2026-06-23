@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase, WorkoutLogWithExercise } from '../lib/supabase';
-import Calendar from 'lucide-react/dist/esm/icons/calendar';
-import Trash2 from 'lucide-react/dist/esm/icons/trash-2';
-import TrendingUp from 'lucide-react/dist/esm/icons/trending-up';
+import { Calendar, Trash2, TrendingUp } from 'lucide-react';
 
 type GroupedWorkouts = {
   [date: string]: {
